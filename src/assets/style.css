@@ -49,7 +49,8 @@ footer li a {
 }
 
 footer li a:hover {
-    text-decoration: none;
+    text-decoration: underline !important;
+    color: white;
 }
 
 footer img {
@@ -86,6 +87,12 @@ footer ul p {
     width: 100%;
     border-radius: 20px;
 }
+#minicarsousel .item{
+    transition: 0.4s !important;
+}
+#minicarsousel .item:hover{
+    transform: scale(1.1);
+}
 
 /* ==============================================arrivals========================================== */
 #arrivals {
@@ -107,6 +114,37 @@ footer ul p {
     filter: drop-shadow(0 0 10px);
 }
 
+/* =================================================card========================================= */
+.card .image img{
+    transition: 0.4s;
+}
+.card:hover .image img{
+    transform: scale(1.1);
+}
+.card #view{
+    transition: 0.4s;
+}
+.card #view:hover{
+    text-decoration: underline;
+    color:var(--main) !important;
+}
+#products #more{
+transition: 0.7s;
+box-shadow: 0 0 6px black;
+}
+#products #more:hover{
+    background: var(--button) !important;
+    color: black !important;
+}
+.card .image {
+    height: 80%;
+
+}
+.card .image img {
+    height: 100%;
+    object-fit: contain;
+}
+
 /* ===============================================Trending products=================== */
 #products .card {
     width: 280px;
@@ -114,7 +152,7 @@ footer ul p {
 }
 
 #products .card .image {
-    height: 73%;
+    height: 80%;
 
 }
 
@@ -122,31 +160,14 @@ footer ul p {
     height: 100%;
     object-fit: contain;
 }
-
-/* ======================================product page================================== */
-#productpage .card {
-    width: 250px;
-    height: 300px;
+#products .card-body{
+    z-index: 2;
 }
-
-#productpage .card .image {
-    height: 67%;
-    object-fit: contain;
-}
-
-#productpage .card .image img {
-    height: 100%;
-    object-fit: contain;
-}
-
 /* =====================================About============================================== */
 #about #first img {
     border-radius: 30px;
     border-top-left-radius: 0px;
 }
-
-
-
 /* ==================================================details================================= */
 #details .swiper {
     width: 100%;
@@ -219,7 +240,10 @@ footer ul p {
 #details .butts {
     width: 200px;
 }
-
+/* ===============================================cart=============================== */
+#cart i:hover{
+color:  red !important;
+}
 /* ==================================================contact==================================== */
 #contact .contact2 {
     height: 100px !important;
@@ -232,11 +256,16 @@ footer ul p {
 }
 
 #contact #details{
-    box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px var(--main);
+  
     background: lightblue;
 }
 #location{
     background: lightblue;
+}
+#contact #box{
+    overflow: scroll;
+    height: 200px;
 }
 #box .question small{
     text-align: justify;
@@ -247,4 +276,9 @@ footer ul p {
 
 #empty{
     background-image: repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(112.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(112.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(22.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(45deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(22.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(135deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(157.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),repeating-linear-gradient(67.5deg, hsla(264,0%,88%,0.03) 0px, hsla(264,0%,88%,0.03) 1px,transparent 1px, transparent 12px),linear-gradient(90deg, rgb(151, 26, 210),rgb(57, 199, 205));
+}
+#contact #box{
+    box-shadow: 0 0 5px rgb(51, 160, 223) !important;
+    background: rgb(68, 67, 67);
+    color: white;
 }

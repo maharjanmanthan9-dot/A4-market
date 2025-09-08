@@ -3,7 +3,7 @@ import React from 'react'
 const Slider = () => {
     return (
         <>
-            <div classNameName="banner my-5" id="banner">
+            <div className="banner my-5" id="banner">
                 <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">

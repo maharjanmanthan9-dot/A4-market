@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Data from '../../public/data.json'
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,10 +15,13 @@ import axios from 'axios';
 
 const Homepage = () => {
   const [products, setProducts] = useState([])
-
-  axios.get('https://dummyjson.com/products')
-    .then(res => setProducts(res.data.products))
-    .catch(err => console.log('Axios is not working.'))
+useEffect(()=>{
+  // axios.get('/data.json')
+  //   .then(res => setProducts(res.data.products))
+  //   .catch(err => console.log('Axios is not working.'))
+  setProducts(Data.products)
+},[])
+  
   return (
     <>
       <Slider />
@@ -123,12 +127,13 @@ const Homepage = () => {
           {
             products.slice(0,4).map((item, m)=>(
               <Card data = {item} key={m} />
-            ))
+              // <img src='/images/fav.png' alt=''/>
+                        ))
           }
           
   
         </div>
-        <p className='text-end'><a href="/products" className='btn text-white mx-3' style={{background: '#0077ff'}}>View More Products <i className='bi bi-arrow-right'></i></a></p>
+        <p className='text-end'><a href="/products" className='btn text-white mx-3' id='more' style={{background: '#0077ff'}}>View More Products <i className='bi bi-arrow-right'></i></a></p>
       </div>
 
       {/* End of Trending products */}

@@ -4,6 +4,7 @@ import 'swiper/css';
 
 import Card from '../components/Card';
 import axios from 'axios';
+import Data from '../../public/data.json'
 
 const Products = () => {
 
@@ -12,15 +13,16 @@ const Products = () => {
 
         useEffect(
         () => {
-            axios.get('https://dummyjson.com/products')
-                .then(res => setProducts(res.data.products))
-                .catch(err => console.log('Axios is not working.'))
+            // axios.get('/data.json')
+            //     .then(res => setProducts(res.data.products))
+            //     .catch(err => console.log('Axios is not working.'))
+            setProducts(Data.products)
         }, []
         )
     return (
         <>
 
-            <div className="container my-5" id='productpage'>
+            <div className="container my-5" id='products'>
         
                     <div className="d-md-flex justify-content-center flex-wrap">
                         {

@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Data from '../../public/data.json'
 
 import { useParams } from 'react-router-dom';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
@@ -14,17 +15,19 @@ import Rating from '../components/Rating';
 
 
 const productDetails = () => {
-  const [products, setproducts] = useState({})
+  // const [products, setproducts] = useState({})
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const params = useParams()
   let pid = params.products_id
-  useEffect(
-    () => {
-      axios.get(`https://dummyjson.com/products/${pid}`)
-        .then(res => setproducts(res.data))
-        .catch(err => console.log('Axios is not working.'))
-    }, []
-  )
+  // useEffect(
+  //   () => {
+  //      axios.get(`/data.json/products/${pid}`)
+  //       .then(res => setproducts(res.data))
+  //       .catch(err => console.log('Axios is not working.'))
+
+  //   }, []
+  // )
+  const products = Data.products.find((item)=>item.id== pid)
 
   const [quantity, setQuantity] = useState(1)
 
@@ -56,7 +59,7 @@ const productDetails = () => {
       title: products.title,
       category: products.category,
       quantity: quantity,
-      price: products.price,
+      price: products.price.marketvalue,
       image: products.thumbnail,
       discount: products.discountPercentage,
 
@@ -73,7 +76,11 @@ const productDetails = () => {
         icon: "success",
         text: 'Item added to cart',
         draggable: true
-      });
+      }).then((result) => {
+            if(result.isConfirmed) {
+                window.location.href = '/cart'
+            }
+        })
 
     }
     else
@@ -94,11 +101,11 @@ return (
       <ol className="breadcrumb">
         <li className="breadcrumb-item"><a href="/" className='text-secondary fw-semibold text-decoration-none'>Home</a></li>
         <li className="breadcrumb-item"><a href="/products" className='text-secondary fw-semibold text-decoration-none'>products</a></li>
-        <li className="breadcrumb-item active text-primary fw-semibold" aria-current="page" >{products.category}</li>
+        <li className="breadcrumb-item active text-primary fw-semibold" aria-current="page" >{products.reference}</li>
       </ol>
     </nav>
 
-    <div className="container d-md-flex shadow  " id='details'>
+    <div className="container d-md-flex shadow p-3" id='details'>
       <div className="col-md-4">
         <Swiper
           style={{
@@ -109,21 +116,21 @@ return (
           navigation={false}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper2"
-        >
+          className="mySwiper2 border border-3"
+        > 
           {
-            products.images && products.images.length > 1 ?
+            products.image && products.image.length > 1 ?
               <SwiperSlide>
-                <img src={products.images[0]} />
+                <img src={products.image[0]} />
               </SwiperSlide> :
               <SwiperSlide>
-                <img src={products.images} />
+                <img src={products.image} />
               </SwiperSlide>
           }
           {
-            products.images && products.images.length > 1 ?
+            products.image && products.image.length > 1 ?
               <SwiperSlide>
-                <img src={products.images[1]} />
+                <img src={products.image[1]} />
               </SwiperSlide> : ''
           }
 
@@ -136,19 +143,19 @@ return (
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper"
+          className="mySwiper border border-3"
         >
           {
-            products.images && products.images.length > 1 ?
+            products.image && products.image.length > 1 ?
               <SwiperSlide>
-                <img src={products.images[0]} />
+                <img src={products.image[0]} />
               </SwiperSlide> :
               <SwiperSlide>
-                <img src={products.images} />
+                <img src={products.image} />
               </SwiperSlide>
           }
           {
-            products.images && products.images.length > 1 ? <SwiperSlide><img src={products.images[1]} /></SwiperSlide> : ''
+            products.image && products.image.length > 1 ? <SwiperSlide><img src={products.image[1]} /></SwiperSlide> : ''
           }
 
 
@@ -162,7 +169,7 @@ return (
         }
         <small>{products.description}</small>
         <hr />
-        <p className='price'>${products.price}</p>
+        <p className='price'>${products.price.marketvalue}</p>
         <p className='fw-semibold'>Size:<span className='text-secondary'> S/M/L</span></p>
         <p className="fw-semibold">Features:
           <div className="ms-4 text-secondary">
@@ -171,14 +178,14 @@ return (
             <li>Lightweight for easy transport. </li>
           </div>
         </p>
-        <p className="fw-semibold">Stock: <span className='text-secondary'>{products.stock} units</span></p>
-        <p className="fw-semibold">Quantity:</p>
-        <div className="d-md-flex align-items-center">
-          <button className='btn bg-secondary-subtle rounded-end-0 rounded-start-2 ms-3' style={{ height: '100%' }} onClick={decrease}> - </button>
+        <p className="fw-semibold">Stock: <span className='text-secondary'>{products.quantity} units</span></p>
+        <p className="fw-semibold mb-0">Quantity:</p>
+        <div className="d-flex align-items-center mb-3">
+          <button className='btn bg-secondary-subtle rounded-end-0 rounded-start-2' style={{ height: '100%' }} onClick={decrease}> - </button>
           <p className='mt-3 px-4'>{quantity}</p>
           <button className='btn bg-secondary-subtle rounded-end-2 rounded-start-0' style={{ height: '100%' }} onClick={increase}> + </button></div>
 
-        <button className='btn btn-primary'>{products.availabilityStatus}</button>
+        <button className='btn btn-primary'>{products.stock}</button>
 
 
         <p className="fw-semibold my-2">Return Policy:<span className='text-secondary'> {products.returnPolicy}</span></p>
